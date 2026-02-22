@@ -1,0 +1,47 @@
+import os
+
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
+
+BAR_WIDTH = 28
+
+while True:
+    clear()
+    print("BMI CHECKER")
+    print("=" * 40)
+    print("Enter your details (type exit to quit)\n")
+
+    w = input("Weight (kg): ")
+    if w.lower() == "exit":
+        break
+
+    h = input("Height (cm): ")
+    if h.lower() == "exit":
+        break
+
+    weight = float(w)
+    height_cm = float(h)
+    height_m = height_cm / 100
+
+    bmi = weight / (height_m * height_m)
+
+    if bmi < 18.5:
+        status = "Underweight"
+    elif bmi < 25:
+        status = "Normal"
+    elif bmi < 30:
+        status = "Overweight"
+    else:
+        status = "Obese"
+
+    filled = int(min(bmi, 40) / 40 * BAR_WIDTH)
+    bar = "█" * filled + "░" * (BAR_WIDTH - filled)
+
+    print("\nRESULT")
+    print("-" * 40)
+    print(f"BMI Value : {bmi:.2f}")
+    print(f"Status    : {status}")
+    print(f"Progress  : [{bar}]")
+    print("-" * 40)
+
+    input("\nPress Enter to recalculate...")
